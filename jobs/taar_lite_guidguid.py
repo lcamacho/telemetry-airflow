@@ -355,7 +355,7 @@ def load_amo_external_whitelist(bucket):
     for key, value in list(amo_dump.items()):
         addon_files = value.get("current_version", {}).get("files", {})
         # If any of the addon files are web_extensions compatible, it can be recommended.
-        if any([f.get("is_webextension", False) for f in addon_files]):
+        if any(f.get("is_webextension", False) for f in addon_files):
             final_whitelist.append(value["guid"])
 
     if len(final_whitelist) == 0:
