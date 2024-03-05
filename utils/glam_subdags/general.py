@@ -40,7 +40,7 @@ def repeated_subdag(
 
     if NUM_SAMPLE_IDS % num_partitions != 0:
         raise ValueError(
-            f"Number of partitions must be a divisor "
+            "Number of partitions must be a divisor "
             f"of the number of sample ids ({NUM_SAMPLE_IDS})"
         )
 
