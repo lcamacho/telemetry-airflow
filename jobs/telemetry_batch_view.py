@@ -19,9 +19,8 @@ def call_exit_errors(command):
 
 
 def retrieve_jar():
-    jar_url = environ.get("ARTIFACT_URL")
 
-    if jar_url is None:
+    if (jar_url := environ.get("ARTIFACT_URL")) is None:
         exit(1)
 
 

@@ -282,8 +282,7 @@ with DAG(
 
             These tasks must be downstream of the branch task.
             """
-            weekday = context["execution_date"].isoweekday()
-            if weekday == WeekDay.MONDAY:
+            if (weekday := context["execution_date"].isoweekday()) == WeekDay.MONDAY:
                 return ["probe_scraper_check_expiry"]
             elif weekday == WeekDay.WEDNESDAY:
                 return ["probe_scraper_check_fog_expiry"]
@@ -348,8 +347,7 @@ with DAG(
 
     probe_scraper >> delay_python_task
 
-    image_tag = Variable.get("lookml_generator_release_str")
-    if image_tag is None:
+    if (image_tag := Variable.get("lookml_generator_release_str")) is None:
         image_tag = DEFAULT_LOOKML_GENERATOR_IMAGE_VERSION
 
     lookml_generator_prod = GKEPodOperator(

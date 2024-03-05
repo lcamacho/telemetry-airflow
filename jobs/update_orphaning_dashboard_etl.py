@@ -272,8 +272,7 @@ def longitudinal_shim_transform(project, dataset, table):
         n_hist = len(histograms)
 
         for i, histogram_struct in enumerate(histograms):
-            histogram_array = histogram_struct[histogram_name]
-            if histogram_array:
+            if histogram_array := histogram_struct[histogram_name]:
                 for key, count_histogram_string in histogram_array:
                     if key not in res:
                         res[key] = [0]*n_hist
@@ -291,8 +290,7 @@ def longitudinal_shim_transform(project, dataset, table):
         all_null = True # needed to maintain compatibility with Longitudinal
         for histogram_string_struct in histograms:
             compacted_histogram = [0]*(int(n_values)+1)
-            histogram_string = histogram_string_struct[histogram_name]
-            if histogram_string:
+            if histogram_string := histogram_string_struct[histogram_name]:
                 all_null = False
                 values = json.loads(histogram_string).get('values', {})
                 for key, value in values.items():
@@ -314,8 +312,7 @@ def longitudinal_shim_transform(project, dataset, table):
         res = []
         all_null = True # needed to maintain compatibility with Longitudinal
         for histogram_string_struct in histograms:
-            histogram_string = histogram_string_struct[histogram_name]
-            if histogram_string:
+            if histogram_string := histogram_string_struct[histogram_name]:
                 all_null = False
                 histogram_value = json.loads(histogram_string)['values'].get('0', 0)
                 res.append(histogram_value)

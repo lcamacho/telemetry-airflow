@@ -104,9 +104,8 @@ class Backfill(get_baseview()):
                 lines = g.readlines()
                 for _proc, line in lines:
                     line = line.decode("utf-8")
-                    result = re.match(pattern, line)
 
-                    if result:
+                    if result := re.match(pattern, line):
                         # Adhere to text/event-stream format
                         line = line.replace("<", "").replace(">", "")
                     elif clear and not dry_run:

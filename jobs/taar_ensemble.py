@@ -116,8 +116,7 @@ def get_addons_per_client(users_df, minimum_addons_count):
 
 
 def safe_get_int(row, fieldname, default, factor=None):
-    tmp = getattr(row, fieldname, default)
-    if tmp is None:
+    if (tmp := getattr(row, fieldname, default)) is None:
         return 0
     try:
         if factor is not None:
@@ -129,8 +128,7 @@ def safe_get_int(row, fieldname, default, factor=None):
 
 
 def safe_get_str(row, fieldname):
-    tmp = getattr(row, fieldname, "")
-    if tmp is None:
+    if (tmp := getattr(row, fieldname, "")) is None:
         return ""
     return str(tmp)
 

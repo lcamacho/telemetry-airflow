@@ -42,8 +42,7 @@ def param_validation(params: dict) -> bool:
 
 
 def validate_dag_exists(dag_name: str) -> None:
-    dag_instance = DagModel.get_dagmodel(dag_name)
-    if dag_instance is None:
+    if (dag_instance := DagModel.get_dagmodel(dag_name)) is None:
         raise ValueError(f"`dag_name`={dag_name} does not exist")
 
 

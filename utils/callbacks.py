@@ -20,10 +20,9 @@ def retry_tasks_callback(context: Context, session: Session | None = None) -> No
     if isinstance(retry_task_ids, str):
         retry_task_ids = [retry_task_ids]
     dag_run: DagRun = context["dag_run"]
-    retry_task_instances = [
+    if retry_task_instances := [
         task_instance
         for task_instance in dag_run.get_task_instances(session=session)
         if task_instance.task_id in retry_task_ids
-    ]
-    if retry_task_instances:
+    ]:
         clear_task_instances(retry_task_instances, session=session)
