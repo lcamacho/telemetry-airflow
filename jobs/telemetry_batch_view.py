@@ -42,7 +42,7 @@ def retrieve_jar():
     # [1] https://github.com/mozilla/telemetry-batch-view/blob/14741db20dd3873b94944b8238dfc48a003c744d/deploy.sh#L50
 
     txt_url = jar_url.replace(".jar", ".txt")
-    response = requests.get(txt_url)
+    response = requests.get(txt_url, timeout=60)
 
     if response.status_code != 404:
         uri_query, _, build_url = response.content.partition("\n")
@@ -57,7 +57,7 @@ def retrieve_jar():
         print("  Alias: {}".format(full_url))
         print("  Build URL: {}".format(build_url.strip()))
 
-    response = requests.get(jar_url)
+    response = requests.get(jar_url, timeout=60)
     with open(artifact_file, 'wb') as f:
         f.write(response.content)
 
