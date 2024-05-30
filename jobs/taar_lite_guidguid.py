@@ -222,9 +222,7 @@ def transform(longitudinal_addons):
         .collect()
     )
     logging.info(
-        "Number of unique guids co-installed in sample: "
-        + str(len(guid_set_unique))
-    )
+        "Number of unique guids co-installed in sample: %s", str(len(guid_set_unique)))
 
     restructured = longitudinal_addons.rdd.flatMap(
         lambda x: key_all(x.installed_addons)
