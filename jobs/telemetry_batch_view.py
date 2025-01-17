@@ -7,13 +7,14 @@ from subprocess import call, PIPE, Popen
 from urlparse import urlparse
 import zipfile
 import boto3
+from security import safe_command
 
 artifact_file = "artifact.jar"
 
 
 def call_exit_errors(command):
     print("+ {}".format(" ".join(command)))
-    rc = call(command, env=environ.copy())
+    rc = safe_command.run(call, command, env=environ.copy())
     if rc > 0:
        exit(rc)
 
